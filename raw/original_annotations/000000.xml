@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>000000.jpg</filename>
+	<path>D:\code\yolov5-master\datasetname\images\000000.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>947</width>
+		<height>1421</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>safety_helmet</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>51</xmin>
+			<ymin>70</ymin>
+			<xmax>910</xmax>
+			<ymax>1115</ymax>
+		</bndbox>
+	</object>
+</annotation>
