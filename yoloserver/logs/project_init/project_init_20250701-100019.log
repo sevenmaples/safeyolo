@@ -1,0 +1,8 @@
+2025-07-01 10:00:19,267 - project_initializer - INFO : ====================日志记录器开始初始化====================
+2025-07-01 10:00:19,267 - project_initializer - INFO : 日志记录器已初始化，日志文件保存在: C:\Users\22341\Project\safeyolo\yoloserver\logs\project_init\project_init_20250701-100019.log
+2025-07-01 10:00:19,267 - project_initializer - INFO : 日志记录器初始化时间：2025-07-01 10:00:19.267076
+2025-07-01 10:00:19,267 - project_initializer - INFO : 日志记录器名称: project_initializer
+2025-07-01 10:00:19,267 - project_initializer - INFO : 日志记录器最低记录级别: INFO
+2025-07-01 10:00:19,267 - project_initializer - INFO : ====================日志记录器初始化完成====================
+2025-07-01 10:00:19,267 - project_initializer - INFO : 这是一条项目初始化的 INFO 日志。
+2025-07-01 10:00:19,267 - project_initializer - WARNING : 这是一条项目初始化的 WARNING 日志。

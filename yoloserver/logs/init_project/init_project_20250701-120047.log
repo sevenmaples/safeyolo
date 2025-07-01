@@ -1,0 +1,30 @@
+2025-07-01 12:00:47,637 - YOLO Init Project - INFO : ====================日志记录器开始初始化====================
+2025-07-01 12:00:47,639 - YOLO Init Project - INFO : 日志记录器已初始化，日志文件保存在: C:\Users\22341\Project\safeyolo\yoloserver\logs\init_project\init_project_20250701-120047.log
+2025-07-01 12:00:47,639 - YOLO Init Project - INFO : 日志记录器初始化时间：2025-07-01 12:00:47.639420
+2025-07-01 12:00:47,639 - YOLO Init Project - INFO : 日志记录器名称: YOLO Init Project
+2025-07-01 12:00:47,640 - YOLO Init Project - INFO : 日志记录器最低记录级别: INFO
+2025-07-01 12:00:47,640 - YOLO Init Project - INFO : ====================日志记录器初始化完成====================
+2025-07-01 12:00:47,640 - YOLO Init Project - INFO : ==================开始检查并创建项目核心目录===================
+2025-07-01 12:00:47,640 - YOLO Init Project - INFO : 目录已存在: configs
+2025-07-01 12:00:47,640 - YOLO Init Project - INFO : 目录已存在: data
+2025-07-01 12:00:47,640 - YOLO Init Project - INFO : 目录已存在: runs
+2025-07-01 12:00:47,641 - YOLO Init Project - INFO : 目录已存在: models
+2025-07-01 12:00:47,641 - YOLO Init Project - INFO : 目录已存在: models\pretrained
+2025-07-01 12:00:47,641 - YOLO Init Project - INFO : 目录已存在: models\checkpoints
+2025-07-01 12:00:47,641 - YOLO Init Project - INFO : 目录已存在: scripts
+2025-07-01 12:00:47,641 - YOLO Init Project - INFO : 目录已存在: logs
+2025-07-01 12:00:47,641 - YOLO Init Project - INFO : 目录已存在: data\raw
+2025-07-01 12:00:47,642 - YOLO Init Project - INFO : 目录已存在: data\raw\images
+2025-07-01 12:00:47,642 - YOLO Init Project - INFO : 目录已存在: data\raw\original_annotations
+2025-07-01 12:00:47,642 - YOLO Init Project - INFO : 目录已存在: data\raw\yolo_staged_labels
+2025-07-01 12:00:47,643 - YOLO Init Project - INFO : 目录已存在: data\train\images
+2025-07-01 12:00:47,643 - YOLO Init Project - INFO : 目录已存在: data\train\labels
+2025-07-01 12:00:47,643 - YOLO Init Project - INFO : 目录已存在: data\val\images
+2025-07-01 12:00:47,643 - YOLO Init Project - INFO : 目录已存在: data\val\labels
+2025-07-01 12:00:47,643 - YOLO Init Project - INFO : 目录已存在: data\test\images
+2025-07-01 12:00:47,644 - YOLO Init Project - INFO : 目录已存在: data\test\labels
+2025-07-01 12:00:47,644 - YOLO Init Project - INFO : ====================目录检查与创建完毕=====================
+2025-07-01 12:00:47,644 - YOLO Init Project - INFO : ====================检查原始数据集目录=====================
+2025-07-01 12:00:47,644 - YOLO Init Project - WARNING : 原始图片目录 为空: data\raw\images，请放入相应数据文件。
+2025-07-01 12:00:47,644 - YOLO Init Project - WARNING : 原始标注目录 为空: data\raw\original_annotations，请放入相应数据文件。
+2025-07-01 12:00:47,644 - YOLO Init Project - INFO : ====================项目初始化流程结束=====================
