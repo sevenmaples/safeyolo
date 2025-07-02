@@ -82,3 +82,59 @@ RuntimeError: 转换失败，未获取到类别信息
 2025-07-02 11:58:20,287 - INFO - 数据集处理流程全部完成！
 2025-07-02 11:58:20,287 - INFO - 总耗时: 0.96 秒
 2025-07-02 11:58:20,287 - INFO - 全部流程结束。请检查 data/ 目录和 configs/data.yaml。
+2025-07-02 18:40:29,745 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 18:40:30,020 - CRITICAL - 转换失败，未获取到类别信息
+2025-07-02 18:40:30,020 - CRITICAL - 脚本执行失败: 转换失败，未获取到类别信息
+Traceback (most recent call last):
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 248, in <module>
+    main_processor.process_dataset()
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 42, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 189, in process_dataset
+    raise RuntimeError("转换失败，未获取到类别信息")
+RuntimeError: 转换失败，未获取到类别信息
+2025-07-02 18:54:02,647 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 18:54:02,920 - CRITICAL - 转换失败，未获取到类别信息
+2025-07-02 18:54:02,920 - CRITICAL - 脚本执行失败: 转换失败，未获取到类别信息
+Traceback (most recent call last):
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 252, in <module>
+    main_processor.process_dataset()
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 42, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 191, in process_dataset
+    raise RuntimeError("转换失败，未获取到类别信息")
+RuntimeError: 转换失败，未获取到类别信息
+2025-07-02 18:55:34,685 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 18:55:35,021 - CRITICAL - 转换失败，未获取到类别信息
+2025-07-02 18:55:35,021 - CRITICAL - 脚本执行失败: 转换失败，未获取到类别信息
+Traceback (most recent call last):
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 254, in <module>
+    main_processor.process_dataset()
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 42, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 191, in process_dataset
+    raise RuntimeError("转换失败，未获取到类别信息")
+RuntimeError: 转换失败，未获取到类别信息
+2025-07-02 18:57:10,673 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 18:57:11,108 - INFO - 暂存区标签文件数: 519, 原始图片数: 519
+2025-07-02 18:57:11,117 - INFO - 成功配对 519 对标签和图片
+2025-07-02 18:57:11,521 - INFO - train集: 复制图片415张，标签415个
+2025-07-02 18:57:11,590 - INFO - val集: 复制图片52张，标签52个
+2025-07-02 18:57:11,641 - INFO - test集: 复制图片52张，标签52个
+2025-07-02 18:57:11,641 - INFO - 已生成 data.yaml: C:\Users\22341\Project\safeyolo\yoloserver\configs\data.yaml
+2025-07-02 18:57:11,641 - INFO - 数据集处理流程全部完成！
+2025-07-02 18:57:11,641 - INFO - 总耗时: 0.97 秒
+2025-07-02 18:57:11,641 - INFO - 全部流程结束。请检查 data/ 目录和 configs/data.yaml。
+2025-07-02 19:18:20,305 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 19:18:20,797 - INFO - 暂存区标签文件数: 519, 原始图片数: 519
+2025-07-02 19:18:20,797 - INFO - 成功配对 519 对标签和图片
+2025-07-02 19:18:21,222 - INFO - train集: 复制图片415张，标签415个
+2025-07-02 19:18:21,281 - INFO - val集: 复制图片52张，标签52个
+2025-07-02 19:18:21,330 - INFO - test集: 复制图片52张，标签52个
+2025-07-02 19:18:21,333 - INFO - 已生成 data.yaml: C:\Users\22341\Project\safeyolo\yoloserver\configs\data.yaml
+2025-07-02 19:18:21,333 - INFO - 数据集处理流程全部完成！
+2025-07-02 19:18:21,335 - INFO - 总耗时: 1.03 秒
+2025-07-02 19:18:21,335 - INFO - 全部流程结束。请检查 data/ 目录和 configs/data.yaml。

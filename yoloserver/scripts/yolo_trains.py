@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 from typing import List, Tuple
 from sklearn.model_selection import train_test_split
+import colorlog
 
 # ==== 路径设置（根据实际项目结构调整） ====
 sys.path.append(str(Path(__file__).resolve().parent.parent))  # yoloserver/
@@ -22,18 +23,24 @@ from yoloserver.utils.data_converters_utils import (
 )
 
 # ========== 日志与性能 ==========
-def setup_logger(log_path: Path):
+def setup_color_logger():
+    handler = colorlog.StreamHandler()
+    handler.setFormatter(colorlog.ColoredFormatter(
+        "%(log_color)s%(asctime)s - %(levelname)s - %(message)s",
+        datefmt=None,
+        reset=True,
+        log_colors={
+            'DEBUG':    'cyan',
+            'INFO':     'green',
+            'WARNING':  'yellow',
+            'ERROR':    'red',
+            'CRITICAL': 'bold_red',
+        }
+    ))
     logger = logging.getLogger("YOLO_DataConversion")
+    logger.handlers = []  # 清空旧handler
+    logger.addHandler(handler)
     logger.setLevel(logging.INFO)
-    fh = logging.FileHandler(log_path, encoding='utf-8')
-    fh.setLevel(logging.INFO)
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    ch.setFormatter(formatter)
-    logger.addHandler(fh)
-    logger.addHandler(ch)
     return logger
 
 def time_it(func):
@@ -176,10 +183,15 @@ class YOLODatasetProcessor:
             if not self.raw_images_path.exists() or not ORIGINAL_ANNOTATIONS_DIR.exists():
                 self.logger.critical("原始图片或标注目录不存在")
                 raise RuntimeError("原始图片或标注目录不存在")
+            # 中文注释路径logger美化输出
+            self.logger.info(f"[TOP] 原标签路径: {ORIGINAL_ANNOTATIONS_DIR}")
+            self.logger.info(f"[TOP] yolo格式标签路径: {YOLO_STAGED_LABELS_DIR}")
+            # 修复：只有self.classes为非空列表时才传递，否则传None让底层自动扫描类别
+            final_classes_order = self.classes if self.classes else None
             self.classes = convert_data_to_yolo(
                 input_dir=ORIGINAL_ANNOTATIONS_DIR,
                 annotation_format=self.annotation_format,
-                final_classes_order=self.classes,
+                final_classes_order=final_classes_order,
                 coco_task=self.coco_task,
                 coco_cls91to80=self.coco_cls91to80,
                 yolo_output_dir=self.yolo_staged_labels_path
@@ -198,6 +210,10 @@ class YOLODatasetProcessor:
         # 步骤4：生成data.yaml
         self.generate_data_yaml()
         self.logger.info("数据集处理流程全部完成！")
+        self.logger.info(f"[TOP] 原标签路径: {ORIGINAL_ANNOTATIONS_DIR}")
+        self.logger.info(f"[TOP] yolo格式标签路径: {YOLO_STAGED_LABELS_DIR}")
+        self.logger.info(f"[TOP] yolo暂存区路径: {self.yolo_staged_labels_path}")
+        self.logger.info(f"[TOP] 原始图片路径: {self.raw_images_path}")
 
 # ========== 命令行接口 ==========
 def parse_args():
@@ -215,7 +231,7 @@ def test_pascal_voc_process():
     测试 pascal_voc 格式的数据集处理流程。
     """
     test_log_path = Path(__file__).resolve().parent / "test_pascal_voc.log"
-    test_logger = setup_logger(test_log_path)
+    test_logger = setup_color_logger()
     try:
         test_processor = YOLODatasetProcessor(
             annotation_format="pascal_voc",
@@ -232,8 +248,10 @@ def test_pascal_voc_process():
 
 if __name__ == "__main__":
     main_args = parse_args()
+    # 使用 colorlog 美化日志
+    main_logger = setup_color_logger()
+    main_logger.info("[TOP] 日志美化已启用 (colorlog)")
     main_log_path = Path(__file__).resolve().parent / "yolo_trains.log"
-    main_logger = setup_logger(main_log_path)
     try:
         main_processor = YOLODatasetProcessor(
             annotation_format=main_args.format,
@@ -244,9 +262,15 @@ if __name__ == "__main__":
             coco_cls91to80=main_args.coco_cls91to80,
             logger=main_logger
         )
+        main_logger.info("[TOP] 开始清理和初始化数据集目录")
         main_processor.clean_and_initialize_dirs()
+        main_logger.info("[TOP] 目录清理完成，准备开始数据处理流程")
+        main_logger.info("[TOP] 调用 main_processor.process_dataset()，将进入中间层")
+        main_logger.info("[MID] 开始执行 convert_data_to_yolo ")
         main_processor.process_dataset()
-        main_logger.info("全部流程结束。请检查 data/ 目录和 configs/data.yaml。")
+        main_logger.info("[MID] convert_data_to_yolo 执行完毕")
+        main_logger.info("[TOP] main_processor.process_dataset() 执行完毕")
+        main_logger.info("[TOP] 全部流程结束。请检查 data/ 目录和 configs/data.yaml。")
     except Exception as main_e:
         main_logger.critical(f"脚本执行失败: {main_e}", exc_info=True)
         sys.exit(1)
