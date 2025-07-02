@@ -1,0 +1,9 @@
+names:
+- person
+- safety_helmet
+- reflective_vest
+nc: 3
+path: C:\Users\22341\Project\safeyolo\yoloserver\data
+test: C:\Users\22341\Project\safeyolo\yoloserver\data\test\images
+train: C:\Users\22341\Project\safeyolo\yoloserver\data\train\images
+val: C:\Users\22341\Project\safeyolo\yoloserver\data\val\images

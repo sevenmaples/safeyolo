@@ -1,0 +1,54 @@
+2025-07-02 11:37:36,442 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 11:37:36,444 - CRITICAL - 原生YOLO目录下无txt标签文件
+2025-07-02 11:37:36,444 - CRITICAL - 脚本执行失败: 原生YOLO目录下无txt标签文件
+Traceback (most recent call last):
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 249, in <module>
+    processor.process_dataset()
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 43, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 172, in process_dataset
+    raise RuntimeError("原生YOLO目录下无txt标签文件")
+RuntimeError: 原生YOLO目录下无txt标签文件
+2025-07-02 11:40:42,143 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 11:40:43,471 - CRITICAL - 转换失败，未获取到类别信息
+2025-07-02 11:40:43,471 - CRITICAL - 脚本执行失败: 转换失败，未获取到类别信息
+Traceback (most recent call last):
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 249, in <module>
+    processor.process_dataset()
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 43, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\22341\Project\safeyolo\yoloserver\scripts\yolo_trains.py", line 190, in process_dataset
+    raise RuntimeError("转换失败，未获取到类别信息")
+RuntimeError: 转换失败，未获取到类别信息
+2025-07-02 11:42:14,490 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 11:42:15,457 - INFO - 暂存区标签文件数: 519, 原始图片数: 519
+2025-07-02 11:42:15,469 - INFO - 成功配对 519 对标签和图片
+2025-07-02 11:42:15,957 - INFO - train集: 复制图片415张，标签415个
+2025-07-02 11:42:16,017 - INFO - val集: 复制图片52张，标签52个
+2025-07-02 11:42:16,077 - INFO - test集: 复制图片52张，标签52个
+2025-07-02 11:42:16,077 - INFO - 已生成 data.yaml: C:\Users\22341\Project\safeyolo\yoloserver\configs\data.yaml
+2025-07-02 11:42:16,077 - INFO - 数据集处理流程全部完成！
+2025-07-02 11:42:16,077 - INFO - 总耗时: 1.59 秒
+2025-07-02 11:42:16,077 - INFO - 全部流程结束。请检查 data/ 目录和 configs/data.yaml。
+2025-07-02 11:46:20,675 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 11:46:21,117 - INFO - 暂存区标签文件数: 519, 原始图片数: 519
+2025-07-02 11:46:21,127 - INFO - 成功配对 519 对标签和图片
+2025-07-02 11:46:21,636 - INFO - train集: 复制图片415张，标签415个
+2025-07-02 11:46:21,698 - INFO - val集: 复制图片52张，标签52个
+2025-07-02 11:46:21,757 - INFO - test集: 复制图片52张，标签52个
+2025-07-02 11:46:21,757 - INFO - 已生成 data.yaml: C:\Users\22341\Project\safeyolo\yoloserver\configs\data.yaml
+2025-07-02 11:46:21,757 - INFO - 数据集处理流程全部完成！
+2025-07-02 11:46:21,757 - INFO - 总耗时: 1.08 秒
+2025-07-02 11:46:21,757 - INFO - 全部流程结束。请检查 data/ 目录和 configs/data.yaml。
+2025-07-02 11:46:40,111 - INFO - 已清理并初始化输出目录和配置文件。
+2025-07-02 11:46:40,447 - INFO - 暂存区标签文件数: 519, 原始图片数: 519
+2025-07-02 11:46:40,457 - INFO - 成功配对 519 对标签和图片
+2025-07-02 11:46:40,947 - INFO - train集: 复制图片415张，标签415个
+2025-07-02 11:46:41,004 - INFO - val集: 复制图片52张，标签52个
+2025-07-02 11:46:41,057 - INFO - test集: 复制图片52张，标签52个
+2025-07-02 11:46:41,057 - INFO - 已生成 data.yaml: C:\Users\22341\Project\safeyolo\yoloserver\configs\data.yaml
+2025-07-02 11:46:41,057 - INFO - 数据集处理流程全部完成！
+2025-07-02 11:46:41,057 - INFO - 总耗时: 0.95 秒
+2025-07-02 11:46:41,057 - INFO - 全部流程结束。请检查 data/ 目录和 configs/data.yaml。
