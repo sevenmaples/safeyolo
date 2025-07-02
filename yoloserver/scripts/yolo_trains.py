@@ -153,7 +153,7 @@ class YOLODatasetProcessor:
 
     def generate_data_yaml(self):
         data_yaml = {
-            "path": str(self.output_data_path.resolve()),
+            "path": "dataset",  # 固定为相对路径 dataset
             "train": str(self.output_dirs["train/images"].resolve()),
             "val": str(self.output_dirs["val/images"].resolve()),
             "test": str(self.output_dirs["test/images"].resolve()),
@@ -210,10 +210,10 @@ class YOLODatasetProcessor:
         # 步骤4：生成data.yaml
         self.generate_data_yaml()
         self.logger.info("数据集处理流程全部完成！")
-        self.logger.info(f"[TOP] 原标签路径: {ORIGINAL_ANNOTATIONS_DIR}")
-        self.logger.info(f"[TOP] yolo格式标签路径: {YOLO_STAGED_LABELS_DIR}")
-        self.logger.info(f"[TOP] yolo暂存区路径: {self.yolo_staged_labels_path}")
-        self.logger.info(f"[TOP] 原始图片路径: {self.raw_images_path}")
+        self.logger.info(f" 原标签路径: {ORIGINAL_ANNOTATIONS_DIR}")
+        self.logger.info(f" yolo格式标签路径: {YOLO_STAGED_LABELS_DIR}")
+        self.logger.info(f" yolo暂存区路径: {self.yolo_staged_labels_path}")
+        self.logger.info(f" 原始图片路径: {self.raw_images_path}")
 
 # ========== 命令行接口 ==========
 def parse_args():
