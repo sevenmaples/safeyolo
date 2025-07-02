@@ -4,7 +4,6 @@
 # @Function  :端到端自动化数据准备脚本
 
 import sys
-import os
 import argparse
 import shutil
 import logging
@@ -80,12 +79,12 @@ class YOLODatasetProcessor:
         self.coco_task = coco_task
         self.coco_cls91to80 = coco_cls91to80
 
-    def _clean_and_initialize_dirs(self):
+    def clean_and_initialize_dirs(self):
         # 清理输出数据集目录和 configs/data.yaml
-        for d in self.output_dirs.values():
-            if d.exists():
-                shutil.rmtree(d)
-            d.mkdir(parents=True, exist_ok=True)
+        for out_dir in self.output_dirs.values():
+            if out_dir.exists():
+                shutil.rmtree(out_dir)
+            out_dir.mkdir(parents=True, exist_ok=True)
         if self.config_path.exists():
             self.config_path.unlink()
         # 清理暂存区
@@ -94,7 +93,7 @@ class YOLODatasetProcessor:
         self.yolo_staged_labels_path.mkdir(parents=True, exist_ok=True)
         self.logger.info("已清理并初始化输出目录和配置文件。")
 
-    def _check_staged_data_existence(self):
+    def check_staged_data_existence(self):
         txts = list(self.yolo_staged_labels_path.glob("*.txt"))
         imgs = list(self.raw_images_path.glob("*"))
         if not txts:
@@ -105,7 +104,7 @@ class YOLODatasetProcessor:
             raise RuntimeError("原始图片目录无图片")
         self.logger.info(f"暂存区标签文件数: {len(txts)}, 原始图片数: {len(imgs)}")
 
-    def _find_matching_files(self) -> List[Tuple[Path, Path]]:
+    def find_matching_files(self) -> List[Tuple[Path, Path]]:
         # 匹配标签和图片
         image_exts = [".jpg", ".jpeg", ".png", ".bmp"]
         pairs = []
@@ -119,7 +118,7 @@ class YOLODatasetProcessor:
         self.logger.info(f"成功配对 {len(pairs)} 对标签和图片")
         return pairs
 
-    def _process_single_split(self, pairs: List[Tuple[Path, Path]], split: str):
+    def process_single_split(self, pairs: List[Tuple[Path, Path]], split: str):
         img_dir = self.output_dirs[f"{split}/images"]
         label_dir = self.output_dirs[f"{split}/labels"]
         for label_path, img_path in pairs:
@@ -127,7 +126,7 @@ class YOLODatasetProcessor:
             shutil.copy2(label_path, label_dir / label_path.name)
         self.logger.info(f"{split}集: 复制图片{len(pairs)}张，标签{len(pairs)}个")
 
-    def _split_and_process_data(self, pairs: List[Tuple[Path, Path]]):
+    def split_and_process_data(self, pairs: List[Tuple[Path, Path]]):
         if not pairs:
             self.logger.warning("没有可用的图片-标签对，跳过数据集划分。")
             return
@@ -141,11 +140,11 @@ class YOLODatasetProcessor:
         # 小数据集特殊处理
         if len(pairs) < 3:
             train_pairs, val_pairs, test_pairs = pairs, [], []
-        self._process_single_split(train_pairs, "train")
-        self._process_single_split(val_pairs, "val")
-        self._process_single_split(test_pairs, "test")
+        self.process_single_split(train_pairs, "train")
+        self.process_single_split(val_pairs, "val")
+        self.process_single_split(test_pairs, "test")
 
-    def _generate_data_yaml(self):
+    def generate_data_yaml(self):
         data_yaml = {
             "path": str(self.output_data_path.resolve()),
             "train": str(self.output_dirs["train/images"].resolve()),
@@ -192,12 +191,12 @@ class YOLODatasetProcessor:
             self.logger.critical(f"不支持的标注格式: {self.annotation_format}")
             raise ValueError(f"不支持的标注格式: {self.annotation_format}")
         # 步骤2：检查暂存区
-        self._check_staged_data_existence()
+        self.check_staged_data_existence()
         # 步骤3：配对与划分
-        pairs = self._find_matching_files()
-        self._split_and_process_data(pairs)
+        pairs = self.find_matching_files()
+        self.split_and_process_data(pairs)
         # 步骤4：生成data.yaml
-        self._generate_data_yaml()
+        self.generate_data_yaml()
         self.logger.info("数据集处理流程全部完成！")
 
 # ========== 命令行接口 ==========
@@ -215,39 +214,41 @@ def test_pascal_voc_process():
     """
     测试 pascal_voc 格式的数据集处理流程。
     """
-    log_path = Path(__file__).resolve().parent / "test_pascal_voc.log"
-    logger = setup_logger(log_path)
+    test_log_path = Path(__file__).resolve().parent / "test_pascal_voc.log"
+    test_logger = setup_logger(test_log_path)
     try:
-        processor = YOLODatasetProcessor(
+        test_processor = YOLODatasetProcessor(
             annotation_format="pascal_voc",
             train_rate=0.8,
             valid_rate=0.1,
             classes=None,  # 自动类别
-            logger=logger
+            logger=test_logger
         )
-        processor._clean_and_initialize_dirs()
-        processor.process_dataset()
+        test_processor.clean_and_initialize_dirs()
+        test_processor.process_dataset()
         print("Pascal VOC 测试完成，请检查 data/ 目录和 configs/data.yaml。")
-    except Exception as e:
-        print(f"Pascal VOC 测试失败: {e}")
+    except Exception as test_e:
+        print(f"Pascal VOC 测试失败: {test_e}")
 
 if __name__ == "__main__":
-    args = parse_args()
-    log_path = Path(__file__).resolve().parent / "yolo_trains.log"
-    logger = setup_logger(log_path)
+    main_args = parse_args()
+    main_log_path = Path(__file__).resolve().parent / "yolo_trains.log"
+    main_logger = setup_logger(main_log_path)
     try:
-        processor = YOLODatasetProcessor(
-            annotation_format=args.format,
-            train_rate=args.train_rate,
-            valid_rate=args.valid_rate,
-            classes=args.classes,
-            logger=logger
+        main_processor = YOLODatasetProcessor(
+            annotation_format=main_args.format,
+            train_rate=main_args.train_rate,
+            valid_rate=main_args.valid_rate,
+            classes=main_args.classes,
+            coco_task=main_args.coco_task,
+            coco_cls91to80=main_args.coco_cls91to80,
+            logger=main_logger
         )
-        processor._clean_and_initialize_dirs()
-        processor.process_dataset()
-        logger.info("全部流程结束。请检查 data/ 目录和 configs/data.yaml。")
-    except Exception as e:
-        logger.critical(f"脚本执行失败: {e}", exc_info=True)
+        main_processor.clean_and_initialize_dirs()
+        main_processor.process_dataset()
+        main_logger.info("全部流程结束。请检查 data/ 目录和 configs/data.yaml。")
+    except Exception as main_e:
+        main_logger.critical(f"脚本执行失败: {main_e}", exc_info=True)
         sys.exit(1)
 
     # 测试函数调用（如需测试，取消注释）
