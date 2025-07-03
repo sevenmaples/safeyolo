@@ -8,6 +8,7 @@ sys.path.insert(0, str(project_root))
 import logging
 from datetime import datetime
 from yoloserver.utils import path
+import colorlog
 
 
 def setup_logging(base_path: Path,
@@ -66,7 +67,18 @@ def setup_logging(base_path: Path,
 
     # 6. 创建控制台处理器
     console_handler = logging.StreamHandler()
-    console_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s : %(message)s"))
+    console_handler.setFormatter(colorlog.ColoredFormatter(
+        "%(log_color)s%(asctime)s - %(name)s - %(levelname)s : %(message)s",
+        datefmt=None,
+        reset=True,
+        log_colors={
+            'DEBUG':    'cyan',
+            'INFO':     'blue',
+            'WARNING':  'yellow',
+            'ERROR':    'red',
+            'CRITICAL': 'bold_red',
+        }
+    ))
     logger.addHandler(console_handler)
 
     # 7. 输出一些初始化信息

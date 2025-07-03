@@ -4,6 +4,8 @@
 # @Function  :端到端自动化数据准备脚本
 
 import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 import argparse
 import shutil
 import logging
@@ -216,14 +218,31 @@ class YOLODatasetProcessor:
         self.logger.info(f" 原始图片路径: {self.raw_images_path}")
 
 # ========== 命令行接口 ==========
+def auto_detect_format(raw_dir):
+    """
+    自动推断数据集格式。优先级：COCO > Pascal VOC > YOLO
+    """
+    raw_dir = Path(raw_dir)
+    # COCO: 有 annotations 目录或 .json 文件
+    if (raw_dir / 'annotations').exists() or list(raw_dir.glob('*.json')):
+        return 'coco'
+    # Pascal VOC: 有 Annotations 目录或 original_annotations 目录下有 xml
+    if (raw_dir / 'Annotations').exists() or (raw_dir / 'original_annotations').glob('*.xml'):
+        return 'pascal_voc'
+    # YOLO: 有 images 和 yolo_staged_labels 或 original_annotations 下有 txt
+    if (raw_dir / 'images').exists() and ((raw_dir / 'yolo_staged_labels').exists() or list((raw_dir / 'original_annotations').glob('*.txt'))):
+        return 'yolo'
+    raise ValueError(f'无法自动识别数据集格式，请手动指定 --format。已检查目录: {raw_dir}')
+
 def parse_args():
     parser = argparse.ArgumentParser(description="YOLO数据集自动化准备脚本")
-    parser.add_argument("--format", type=str, required=True, choices=["yolo", "coco", "pascal_voc"], help="原始标注格式")
+    parser.add_argument("--format", type=str, required=False, choices=["yolo", "coco", "pascal_voc"], help="原始标注格式")
     parser.add_argument("--train_rate", type=float, default=0.8, help="训练集比例")
     parser.add_argument("--valid_rate", type=float, default=0.1, help="验证集比例")
     parser.add_argument("--classes", type=str, nargs="*", help="类别名称列表（YOLO格式必须指定）")
     parser.add_argument("--coco_task", type=str, default="detection", help="COCO任务类型")
     parser.add_argument("--coco_cls91to80", action="store_true", help="COCO是否91类转80类")
+    parser.add_argument("--raw_dir", type=str, default="raw", help="数据集根目录 (默认 raw)")
     return parser.parse_args()
 
 def test_pascal_voc_process():
@@ -248,6 +267,10 @@ def test_pascal_voc_process():
 
 if __name__ == "__main__":
     main_args = parse_args()
+    # 自动推断 format
+    if main_args.format is None:
+        main_args.format = auto_detect_format(main_args.raw_dir)
+        print(f"[AUTO] 自动识别数据集格式为: {main_args.format}")
     # 使用 colorlog 美化日志
     main_logger = setup_color_logger()
     main_logger.info("[TOP] 日志美化已启用 (colorlog)")

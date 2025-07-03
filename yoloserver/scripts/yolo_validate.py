@@ -1,16 +1,21 @@
 import argparse
 from pathlib import Path
 import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from yoloserver.utils.dataset_validation import verify_dataset_config, verify_split_uniqueness, delete_invalid_files
 from yoloserver.utils.logging_utils import setup_logging
 import colorlog
+from yoloserver.utils.dataset_prepare import organize_dataset
+import yaml
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="YOLO数据集验证工具", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--yaml', type=str, default='yoloserver/configs/data.yaml', help='data.yaml文件路径')
+    parser.add_argument('--yaml', type=str, default=None, help='data.yaml文件路径')
     parser.add_argument('--mode', type=str, default='FULL', choices=['FULL', 'SAMPLE'], help='验证模式：FULL(全量)/SAMPLE(抽样)')
     parser.add_argument('--task', type=str, default='detection', choices=['detection', 'segmentation'], help='任务类型')
     parser.add_argument('--delete-invalid', action='store_true', help='是否自动删除不合法文件')
+    parser.add_argument('--prepare', action='store_true', help='是否先整理原始数据集并生成 data.yaml')
     args = parser.parse_args()
 
     # 日志初始化（控制台彩色+文件）
@@ -32,8 +37,44 @@ if __name__ == "__main__":
     logger.addHandler(handler)
     logger.setLevel('INFO')
 
+    # 新增：如指定 --prepare，先整理数据集
+    if args.prepare:
+        logger.info("[TOP] 开始整理原始数据集...")
+        data_yaml_path = organize_dataset(
+            img_dir=Path('raw/images'),
+            label_dir=Path('raw/yolo_staged_labels'),
+            out_root=Path('dataset'),
+            split_ratio=[0.8, 0.1, 0.1],
+            names=['head', 'ordinary_clothes', 'person', 'reflective_vest', 'safety_helmet']
+        )
+        args.yaml = str(data_yaml_path)
+        logger.info(f"[TOP] 数据集整理完成，生成配置文件: {args.yaml}")
+
+    # 自动查找 data.yaml（升级：查找 safeyolo 根目录下的 dataset/data.yaml）
+    if args.yaml is None:
+        # safeyolo 根目录 = 当前脚本的上上级目录
+        root_dir = Path(__file__).resolve().parent.parent.parent
+        candidates = [root_dir / 'dataset/data.yaml', root_dir / 'yoloserver/configs/data.yaml']
+        found = False
+        for cand in candidates:
+            if cand.exists():
+                args.yaml = str(cand)
+                logger.info(f"[TOP] 未指定 --yaml，自动使用: {args.yaml}")
+                found = True
+                break
+        if not found:
+            logger.error("[TOP] 未找到 data.yaml，请用 --yaml 指定配置文件路径，或先运行数据集整理脚本！")
+            sys.exit(1)
+
     yaml_path = Path(args.yaml)
     logger.info(f"[TOP] 开始数据集验证，配置文件: {yaml_path}")
+
+    # 新增：打印 data.yaml 配置内容、类别名称和类别数量
+    with open(yaml_path, 'r', encoding='utf-8') as f:
+        configs = yaml.safe_load(f)
+    logger.info(f"配置内容: {configs}")
+    logger.info(f"类别名称: {configs.get('names')}")
+    logger.info(f"类别数量: {configs.get('nc')}")
 
     # 1. 基础验证
     passed, invalid_list = verify_dataset_config(yaml_path, logger, args.mode, args.task)
@@ -61,4 +102,6 @@ if __name__ == "__main__":
         sys.exit(0)
     else:
         logger.error("[TOP] 数据集验证未通过，请根据日志修复问题后重试！")
-        sys.exit(1) 
+        sys.exit(1)
+
+print("当前工作目录:", os.getcwd()) 

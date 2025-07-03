@@ -5,7 +5,7 @@ names:
 - reflective_vest
 - safety_helmet
 nc: 5
-path: C:\Users\22341\Project\safeyolo\yoloserver\datasets
-train: dataset/images/train
-val: dataset/images/val
-test: dataset/images/test
+path: dataset
+test: C:\Users\22341\Project\safeyolo\yoloserver\data\test\images
+train: C:\Users\22341\Project\safeyolo\yoloserver\data\train\images
+val: C:\Users\22341\Project\safeyolo\yoloserver\data\val\images
