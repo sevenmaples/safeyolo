@@ -2,14 +2,21 @@ import sys
 from pathlib import Path
 
 # 自动将项目根目录加入 sys.path
-project_root = Path(__file__).resolve().parent.parent.parent
+project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 import logging
 from datetime import datetime
-from yoloserver.utils import path
 import colorlog
 
+def rename_log_file(temp_log_path: Path, model_name: str) -> Path:
+    log_dir = temp_log_path.parent
+    existing_logs = [f.name for f in log_dir.glob('train*.log')]
+    n = max([int(f.split('-')[0].replace('train', '')) for f in existing_logs if f.startswith('train')] or [0]) + 1
+    new_name = log_dir / f'train{n}-{datetime.now().strftime("%Y%m%d_%H%M%S")}-{model_name}.log'
+    temp_log_path.rename(new_name)
+    logging.info(f'日志重命名: {new_name}')
+    return new_name
 
 def setup_logging(base_path: Path,
                   log_type: str = "general",
@@ -94,8 +101,9 @@ def setup_logging(base_path: Path,
 # --- 用于测试 ---
 if __name__ == '__main__':
     print("--- 场景1: 测试带时间戳的永久日志 ---")
+    logs_dir = Path("logs")
     init_logger = setup_logging(
-        base_path=path.LOGS_DIR,
+        base_path=logs_dir,
         logger_name='project_initializer', 
         log_type='project_init'
     )
@@ -104,11 +112,11 @@ if __name__ == '__main__':
 
     print("--- 场景2: 测试可覆盖的临时日志 (DEBUG 级别) ---")
     conv_logger = setup_logging(
-        base_path=path.LOGS_DIR,
+        base_path=logs_dir,
         logger_name='data_converter', 
         log_type='data_conversion', 
         log_level=logging.DEBUG, 
         temp_log=True
     )
     conv_logger.debug("这是一条数据转换的 DEBUG 日志。")
-    conv_logger.error("这是一条数据转换的 ERROR 日志。")
+    conv_logger.error("这是一条数据转换的 ERROR 日志。") 

@@ -1,0 +1,85 @@
+﻿2025-07-03 16:57:04,598 - YOLO_TRAIN - INFO : ====================日志记录器开始初始化====================
+2025-07-03 16:57:04,598 - YOLO_TRAIN - INFO : 日志记录器已初始化，日志文件保存在: logs\train\temp_20250703-165704_yolov8.log
+2025-07-03 16:57:04,598 - YOLO_TRAIN - INFO : 日志记录器初始化时间：2025-07-03 16:57:04.598371
+2025-07-03 16:57:04,598 - YOLO_TRAIN - INFO : 日志记录器名称: YOLO_TRAIN
+2025-07-03 16:57:04,598 - YOLO_TRAIN - INFO : 日志记录器最低记录级别: INFO
+2025-07-03 16:57:04,598 - YOLO_TRAIN - INFO : ====================日志记录器初始化完成====================
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : ========================日志记录器初始化开始=========================
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : 当前日志记录器的根目录: C:\Users\22341\Project\safeyolo\yoloserver\logs
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : 当前日志记录器的名称: YOLO_TRAIN
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : 当前日志记录器的类型: train
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : 单前日志记录器的级别: INFO
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : ========================日志记录器初始化成功=========================
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : ===============================YOLO 训练脚本启动=================================
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : 设备信息概览
+2025-07-03 16:57:04,607 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO : 基本设备信息:
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO :     操作系统            : Windows 10.0.26120
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO :     Python版本          : 3.12.0
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO :     Python解释器路径    : C:\Users\22341\.conda\envs\safeyolo\python.exe
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO :     Python虚拟环境      : safeyolo
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO :     当前检测时间        : 2025-07-03 16:57:04
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO :     主机名              : LAPTOP
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO :     当前用户            : 22341
+2025-07-03 16:57:04,608 - YOLO_TRAIN - INFO : CPU信息:
+2025-07-03 16:57:04,628 - YOLO_TRAIN - INFO :     CPU型号             : Intel64 Family 6 Model 154 Stepping 3, GenuineIntel
+2025-07-03 16:57:04,629 - YOLO_TRAIN - INFO :     CPU物理核心数       : 14
+2025-07-03 16:57:04,629 - YOLO_TRAIN - INFO :     CPU逻辑核心数       : 20
+2025-07-03 16:57:04,630 - YOLO_TRAIN - INFO :     CPU使用率           : 11.9%
+2025-07-03 16:57:04,630 - YOLO_TRAIN - INFO : GPU信息:
+2025-07-03 16:57:04,650 - YOLO_TRAIN - INFO :     CUDA是否可用        : True
+2025-07-03 16:57:04,650 - YOLO_TRAIN - INFO :     CUDA版本            : 12.6
+2025-07-03 16:57:04,728 - YOLO_TRAIN - INFO :     NVIDIA驱动程序版本  : 576.80
+2025-07-03 16:57:04,729 - YOLO_TRAIN - INFO :     可用的GPU数量       : 1
+2025-07-03 16:57:04,729 - YOLO_TRAIN - INFO : 内存信息:
+2025-07-03 16:57:04,735 - YOLO_TRAIN - INFO :     总内存              : 34.14 GB
+2025-07-03 16:57:04,735 - YOLO_TRAIN - INFO :     已使用内存          : 19.87 GB
+2025-07-03 16:57:04,735 - YOLO_TRAIN - INFO :     剩余内存            : 14.27 GB
+2025-07-03 16:57:04,735 - YOLO_TRAIN - INFO :     内存使用率          : 58.2%
+2025-07-03 16:57:04,735 - YOLO_TRAIN - INFO : 环境信息:
+2025-07-03 16:57:04,735 - YOLO_TRAIN - INFO :     PyTorch版本         : 2.7.1+cu126
+2025-07-03 16:57:04,735 - YOLO_TRAIN - INFO :     cuDNN版本           : 90701
+2025-07-03 16:57:05,148 - YOLO_TRAIN - INFO :     Ultralytics_Version : 8.3.160
+2025-07-03 16:57:05,148 - YOLO_TRAIN - INFO :     ONNX版本            : 未安装
+2025-07-03 16:57:05,148 - YOLO_TRAIN - INFO :     Numpy版本           : 2.1.2
+2025-07-03 16:57:05,148 - YOLO_TRAIN - INFO :     OpenCV版本          : 4.11.0
+2025-07-03 16:57:05,148 - YOLO_TRAIN - INFO :     Pillow版本          : 未知
+2025-07-03 16:57:06,319 - YOLO_TRAIN - INFO :     Torchvision版本     : 0.22.1+cu126
+2025-07-03 16:57:06,319 - YOLO_TRAIN - INFO : 磁盘信息:
+2025-07-03 16:57:06,319 - YOLO_TRAIN - INFO :     总空间              : 508.69 GB
+2025-07-03 16:57:06,320 - YOLO_TRAIN - INFO :     已用空间            : 201.25 GB
+2025-07-03 16:57:06,320 - YOLO_TRAIN - INFO :     剩余空间            : 307.44 GB
+2025-07-03 16:57:06,320 - YOLO_TRAIN - INFO :     使用率              : 39.6%
+2025-07-03 16:57:06,320 - YOLO_TRAIN - INFO : GPU详细列表:
+2025-07-03 16:57:06,322 - YOLO_TRAIN - INFO :   --- GPU 0 详情 ---
+2025-07-03 16:57:06,323 - YOLO_TRAIN - INFO :     GPU_0_型号               : NVIDIA GeForce RTX 3050 Laptop GPU
+2025-07-03 16:57:06,323 - YOLO_TRAIN - INFO :     GPU_0_总显存             : 4.29 GB
+2025-07-03 16:57:06,323 - YOLO_TRAIN - INFO :     GPU_0_算力               : 8.6
+2025-07-03 16:57:06,323 - YOLO_TRAIN - INFO :     GPU_0_多处理器数量       : 16
+2025-07-03 16:57:06,325 - YOLO_TRAIN - INFO :     GPU_0_PyTorch_已分配显存 : 0.00 MB
+2025-07-03 16:57:06,325 - YOLO_TRAIN - INFO :     GPU_0_PyTorch_已缓存显存 : 0.00 MB
+2025-07-03 16:57:06,390 - YOLO_TRAIN - INFO :     GPU_0_利用率             : GPU:12% / Mem:26%
+2025-07-03 16:57:06,391 - YOLO_TRAIN - INFO :     GPU_0_实时使用显存       : 2.18 GB
+2025-07-03 16:57:06,391 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:57:06,393 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:57:06,393 - YOLO_TRAIN - INFO : 参数信息
+2025-07-03 16:57:06,394 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:57:06,394 - YOLO_TRAIN - INFO : epochs              : 5  来源: [YAML]
+2025-07-03 16:57:06,394 - YOLO_TRAIN - INFO : batch               : 16  来源: [YAML]
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : names               : ['head', 'ordinary_clothes', 'person', 'reflective_vest', 'safety_helmet']  来源: [YAML]
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : nc                  : 5  来源: [YAML]
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : path                : dataset  来源: [YAML]
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : test                : C:\Users\22341\Project\safeyolo\yoloserver\data\test\images  来源: [YAML]
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : train               : C:\Users\22341\Project\safeyolo\yoloserver\data\train\images  来源: [YAML]
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : val                 : C:\Users\22341\Project\safeyolo\yoloserver\data\val\images  来源: [YAML]
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : data                : configs/data.yaml  来源: [YAML]
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : 类别来源: YAML configs/data.yaml, 类别: ['head', 'ordinary_clothes', 'person', 'reflective_vest', 'safety_helmet']
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : 数据集信息
+2025-07-03 16:57:06,395 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:57:06,399 - YOLO_TRAIN - INFO : Config              : configs/data.yaml
+2025-07-03 16:57:06,399 - YOLO_TRAIN - INFO : Classes             : 5
+2025-07-03 16:57:06,400 - YOLO_TRAIN - INFO : Names               : ['head', 'ordinary_clothes', 'person', 'reflective_vest', 'safety_helmet']
+2025-07-03 16:57:06,400 - YOLO_TRAIN - INFO : Train_Samples       : 415
+2025-07-03 16:57:06,400 - YOLO_TRAIN - INFO : Val_Samples         : 52

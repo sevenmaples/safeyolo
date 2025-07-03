@@ -23,7 +23,7 @@ def time_it(func):
         if logger:
             logger.info(f"[PERF] {func.__name__} 总耗时: {elapsed:.2f} 秒")
         else:
-            print(f"[PERF] {func.__name__} 总耗时: {elapsed:.2f} 秒")
+            print(f"\033[32m[PERF] {func.__name__} 总耗时: {elapsed:.2f} 秒\033[0m")
         return result
     return wrapper
 
@@ -330,11 +330,18 @@ if __name__ == "__main__":
     parser.add_argument('--yaml', type=str, default=None, help='data.yaml文件路径')
     parser.add_argument('--mode', type=str, default='FULL', choices=['FULL', 'SAMPLE'], help='验证模式：FULL(全量)/SAMPLE(抽样)')
     parser.add_argument('--task', type=str, default='detection', choices=['detection', 'segmentation'], help='任务类型')
-    parser.add_argument('--delete-invalid', action='store_true', help='是否自动删除不合法文件')
+    parser.add_argument('--delete-mode', type=str, default='none', choices=['none', 'auto', 'manual'], help='不合法文件删除模式：none(不删除)/auto(自动删除)/manual(手动选择)')
+    parser.add_argument('--delete-invalid', action='store_true', help='等价于 --delete-mode auto')
     parser.add_argument('--prepare', action='store_true', help='是否先整理原始数据集并生成 data.yaml')
     parser.add_argument('--sample-ratio', type=float, default=0.1, help='SAMPLE模式下采样比例')
     parser.add_argument('--min-samples', type=int, default=10, help='SAMPLE模式下每split最小采样数')
     args = parser.parse_args()
+
+    # 解析删除模式
+    if getattr(args, 'delete_invalid', False):
+        delete_mode = 'auto'
+    else:
+        delete_mode = getattr(args, 'delete_mode', 'none')
 
     # 日志初始化（控制台彩色+文件）
     logger = setup_logging(base_path=Path('yoloserver/logs'), log_type='yolo_validate', model_name=None, temp_log=False)
@@ -398,12 +405,25 @@ if __name__ == "__main__":
         yaml_path, logger, args.mode, args.task, args.sample_ratio, args.min_samples)
     if not passed:
         logger.error(f"[TOP] 数据集基础验证未通过，共发现{len(invalid_list)}个问题样本。")
-        if args.delete_invalid and invalid_list:
+        if delete_mode == 'auto':
             logger.warning("[TOP] 启动自动删除不合法文件...")
             delete_invalid_files(invalid_list, logger)
             logger.warning("[TOP] 不合法文件已删除，请重新检查数据集！")
+        elif delete_mode == 'manual':
+            logger.warning("[TOP] 进入手动选择删除模式...")
+            for idx, item in enumerate(invalid_list, 1):
+                img_path = item.get('image_path')
+                label_path = item.get('label_path')
+                err_msg = item.get('error_message', '')
+                print(f"\033[33m\n[{idx}/{len(invalid_list)}] 检测到不合法数据：\n图片: {img_path}\n标签: {label_path}\n原因: {err_msg}\033[0m")
+                choice = input(f"\033[33m是否删除该图片和标签？(y/n): \033[0m").strip().lower()
+                if choice == 'y':
+                    delete_invalid_files([item], logger)
+                else:
+                    logger.info(f"跳过删除: {img_path}, {label_path}")
+            logger.warning("[TOP] 手动删除流程结束，请检查日志！")
         else:
-            logger.warning("[TOP] 检测到不合法文件，未自动删除。可加 --delete-invalid 参数自动删除。")
+            logger.warning("[TOP] 检测到不合法文件，未自动删除。可加 --delete-mode auto 或 manual。")
     else:
         logger.info("[TOP] 数据集基础验证通过！")
 

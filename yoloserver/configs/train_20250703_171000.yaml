@@ -1,0 +1,11 @@
+names:
+- head
+- ordinary_clothes
+- person
+- reflective_vest
+- safety_helmet
+nc: 5
+path: dataset
+test: C:\Users\22341\Project\safeyolo\yoloserver\data\test\images
+train: C:\Users\22341\Project\safeyolo\yoloserver\data\train\images
+val: C:\Users\22341\Project\safeyolo\yoloserver\data\val\images

@@ -1,0 +1,6 @@
+batch: 16
+epochs: 5
+names: []
+nc: 0
+train: images/train
+val: images/val

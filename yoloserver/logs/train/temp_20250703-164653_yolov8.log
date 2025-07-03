@@ -1,0 +1,47 @@
+﻿2025-07-03 16:46:53,156 - YOLO_TRAIN - INFO : ====================日志记录器开始初始化====================
+2025-07-03 16:46:53,156 - YOLO_TRAIN - INFO : 日志记录器已初始化，日志文件保存在: logs\train\temp_20250703-164653_yolov8.log
+2025-07-03 16:46:53,156 - YOLO_TRAIN - INFO : 日志记录器初始化时间：2025-07-03 16:46:53.156998
+2025-07-03 16:46:53,156 - YOLO_TRAIN - INFO : 日志记录器名称: YOLO_TRAIN
+2025-07-03 16:46:53,158 - YOLO_TRAIN - INFO : 日志记录器最低记录级别: INFO
+2025-07-03 16:46:53,158 - YOLO_TRAIN - INFO : ====================日志记录器初始化完成====================
+2025-07-03 16:46:53,159 - YOLO_TRAIN - INFO : ========================日志记录器初始化开始=========================
+2025-07-03 16:46:53,159 - YOLO_TRAIN - INFO : 当前日志记录器的根目录: C:\Users\22341\Project\safeyolo\yoloserver\logs
+2025-07-03 16:46:53,159 - YOLO_TRAIN - INFO : 当前日志记录器的名称: YOLO_TRAIN
+2025-07-03 16:46:53,159 - YOLO_TRAIN - INFO : 当前日志记录器的类型: train
+2025-07-03 16:46:53,160 - YOLO_TRAIN - INFO : 单前日志记录器的级别: INFO
+2025-07-03 16:46:53,160 - YOLO_TRAIN - INFO : ========================日志记录器初始化成功=========================
+2025-07-03 16:46:53,160 - YOLO_TRAIN - INFO : ===============================YOLO 训练脚本启动=================================
+2025-07-03 16:46:53,160 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:46:53,160 - YOLO_TRAIN - INFO : 设备信息概览
+2025-07-03 16:46:53,161 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:46:53,161 - YOLO_TRAIN - INFO : 操作系统                : Windows 10.0.26120
+2025-07-03 16:46:53,161 - YOLO_TRAIN - INFO : Python版本            : 3.12.0
+2025-07-03 16:46:53,161 - YOLO_TRAIN - INFO : Python解释器路径         : C:\Users\22341\.conda\envs\safeyolo\python.exe
+2025-07-03 16:46:53,161 - YOLO_TRAIN - INFO : Python虚拟环境          : safeyolo
+2025-07-03 16:46:53,161 - YOLO_TRAIN - INFO : 当前检测时间              : 2025-07-03 16:46:53
+2025-07-03 16:46:53,161 - YOLO_TRAIN - INFO : 主机名                 : LAPTOP
+2025-07-03 16:46:53,161 - YOLO_TRAIN - INFO : 当前用户                : 22341
+2025-07-03 16:46:53,174 - YOLO_TRAIN - INFO : CPU型号               : Intel64 Family 6 Model 154 Stepping 3, GenuineIntel
+2025-07-03 16:46:53,174 - YOLO_TRAIN - INFO : CPU物理核心数            : 14
+2025-07-03 16:46:53,174 - YOLO_TRAIN - INFO : CPU逻辑核心数            : 20
+2025-07-03 16:46:53,174 - YOLO_TRAIN - INFO : CPU使用率              : 11.5%
+2025-07-03 16:46:53,184 - YOLO_TRAIN - INFO : 总内存                 : 34.14 GB
+2025-07-03 16:46:53,185 - YOLO_TRAIN - INFO : 已使用内存               : 20.04 GB
+2025-07-03 16:46:53,185 - YOLO_TRAIN - INFO : 剩余内存                : 14.10 GB
+2025-07-03 16:46:53,185 - YOLO_TRAIN - INFO : 内存使用率               : 58.7%
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : 参数信息
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : ========================================
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : epochs              : 5  来源: [YAML]
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : batch               : 16  来源: [YAML]
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : names               : []  来源: [YAML]
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : nc                  : 0  来源: [YAML]
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : train               : images/train  来源: [YAML]
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : val                 : images/val  来源: [YAML]
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : data                : configs/data.yaml  来源: [YAML]
+2025-07-03 16:46:53,186 - YOLO_TRAIN - INFO : 类别来源: 自动推断标签文件夹, 类别: []
+2025-07-03 16:46:53,187 - YOLO_TRAIN - ERROR : 错误：未能确定类别名称，训练无法继续。
+请通过以下方式之一指定类别：
+  1. 在命令行中使用 --classes <name1> <name2> ...
+  2. 在 configs/data.yaml 文件中定义 'names' 列表。
+  3. 确保标签文件(.txt)存在于 raw/yolo_staged_labels/ 目录中且包含有效的类别ID。
